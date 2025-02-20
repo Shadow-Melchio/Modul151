@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Anmelden</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <form method="post" action="./php/login.php">
+            <h2>Anmelden</h2>
+            <div class="input-group">
+                <label for="username">Benutzername</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Passwort</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Anmelden</button>
+
+            <a href="register.html" class="button">Registrieren</a>
+        </form>
+    </div>
+</body>
+</html>
