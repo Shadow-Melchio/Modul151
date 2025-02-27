@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 .banner {
-  background-image: url('tulen\images\Banner_pic.jpg'); /* Relativer Pfad */
+  background-image: (''); /* Relativer Pfad */
   background-size: cover;
   background-position: center;
 }
