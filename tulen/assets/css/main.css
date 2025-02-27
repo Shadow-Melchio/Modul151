@@ -3161,12 +3161,13 @@
 /* Banner */
 
 	#banner {
+		background-image: url('../images/Banner_pic.jpg'); /* Relative path */
+		background-size: cover;
+		background-position: center;
 		background-attachment: scroll,							fixed;
 		background-color: #666;
-		background-image: url("images/overlay.png"), url("../../images/tulen/Banner_pic.jpg");
 		background-position: top left,						center center;
 		background-repeat: repeat,							no-repeat;
-		background-size: auto,							cover;
 		color: #fff;
 		padding: 12em 0 20em 0;
 		text-align: center;
