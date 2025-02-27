@@ -1,7 +1,14 @@
 <?php
+session_start([
+    'cookie_lifetime' => 0, // Session wird gelöscht, wenn der Browser geschlossen wird
+    'cookie_secure' => true, // Nur über HTTPS senden
+    'cookie_httponly' => true, // Kein Zugriff über JavaScript
+    'cookie_samesite' => 'Strict' // Verhindert CSRF-Angriffe
+]);
+
 $dsn = 'mysql:host=localhost;dbname=3d_druck_shop;charset=utf8mb4';
-$user = 'root'; // Falls XAMPP genutzt wird, Standardbenutzer ist "root"
-$password = ''; // Standardpasswort ist leer
+$user = 'root';
+$password = '';
 
 try {
     $pdo = new PDO($dsn, $user, $password, [
