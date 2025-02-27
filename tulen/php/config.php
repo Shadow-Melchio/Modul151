@@ -1,7 +1,7 @@
 <?php
 $dsn = 'mysql:host=localhost;dbname=3d_druck_shop;charset=utf8mb4';
-$user = 'root'; // Falls du XAMPP nutzt, ist der Standardbenutzer "root"
-$password = ''; // Falls du XAMPP nutzt, ist das Standardpasswort leer
+$user = 'root'; // Falls XAMPP genutzt wird, Standardbenutzer ist "root"
+$password = ''; // Standardpasswort ist leer
 
 try {
     $pdo = new PDO($dsn, $user, $password, [
