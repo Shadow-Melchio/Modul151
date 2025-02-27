@@ -1,6 +1,5 @@
 <?php
 require_once './config.php';
-session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
@@ -16,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($user && password_verify($password, $user['password'])) {
             // **Session-Fixation verhindern**
-            session_regenerate_id(true);
+            
 
             // **Sichere Session-Daten setzen**
             $_SESSION['user_id'] = $user['id'];
@@ -24,6 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR']; // IP-Adresse speichern
             $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; // User-Agent speichern
             $_SESSION['last_activity'] = time(); // Letzte Aktivität speichern
+            
+            session_regenerate_id(true);
 
             header("Location: ../main.html");
             exit();
