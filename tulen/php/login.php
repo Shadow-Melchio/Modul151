@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             session_regenerate_id(true);
 
-            header("Location: ../main.html");
+            header("Location: ./main.php");
             exit();
         } else {
             $errors[] = "Falscher Benutzername oder Passwort.";
