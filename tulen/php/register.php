@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
         if ($stmt->execute([$username, $email, $passwordHash])) {
             $_SESSION['success'] = "Registrierung erfolgreich! Du kannst dich nun einloggen.";
-            header("Location: login.html");
+            header("Location: ../login.html");
             exit();
         } else {
             $errors[] = "Fehler bei der Registrierung.";

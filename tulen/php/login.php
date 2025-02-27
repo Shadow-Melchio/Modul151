@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once './config.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            header("Location: ../index.html"); // Weiterleitung zum Dashboard
+            header("Location: ../main.html"); // Weiterleitung zum Dashboard
             exit();
         } else {
             $error = "Falscher Benutzername oder Passwort.";
