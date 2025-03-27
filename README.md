@@ -36,9 +36,14 @@ Webshop im Browser öffnen: http://localhost/Modul_151/Modul151/tulen/index.html
 Mitwirkende
 
 Marco Frey - Backend
-
 Florian Brügger - Frontend
 
+Installationsanleitung
+
+Code aus github repository herunterladen
+Datenbank in Xampp importieren
+Website mit http://localhost/Modul_151/Modul151/tulen/index.html aufrufen
+Anmelden mit user Brodbeck, PW: brod12345
 
 Kontakt
 
