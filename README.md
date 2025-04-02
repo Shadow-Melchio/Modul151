@@ -22,10 +22,30 @@ Dies ist ein Webprojekt im Rahmen des Moduls 151. Die Anwendung ist ein einfache
 - Session & Security-Techniken
 
 ## 📁 Projektstruktur
+Wichtigster Teil unserers Projektes.
+(Ordner die nicht hier aufgelistet sind, sind nicht relevant für Prüfung der Abgabe)
 
-/php ├── login.php ├── register.php ├── logout.php ├── products.php ├── edit_product.php ├── delete_product.php ├── change_password.php ├── config.php ├── session_check.php
-
-/css ├── styles.css
+/tulen
+  ├── README.md
+  ├── index.html
+    /php
+      ├── login.php
+      ├── register.php
+      ├── logout.php
+      ├── products.php
+      ├── edit_product.php
+      ├── delete_product.php
+      ├── change_password.php
+      ├── config.php
+      ├── session_check.php
+      ├── main.php
+    /css
+      ├── styles.css
+      ├── style.css
+      ├── index.css
+    /images
+      ├── Banner_pic.jpg
+      ├── banner.jpg
 
 ## 🔒 Sicherheit
 
@@ -55,9 +75,33 @@ Dies ist ein Webprojekt im Rahmen des Moduls 151. Die Anwendung ist ein einfache
 
 Modul 151 – Web-Applikationen mit Datenbankanbindung
 
+### Socials
+
+- Mail: marco.frey@bbzbl-it.ch
+- Telefon: +41 79 631 02 25
+
 ## 🗃️ SQL-Struktur
 
+Führe folgende SQL-Befehle in phpMyAdmin → SQL, über ein MySQL-Terminal oder mit einem Admin-Tool wie MySQL Workbench aus.
+
+
 ```sql
+-- 1. Neue Datenbank erstellen
+CREATE DATABASE 3d_druck_shop CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+-- 2. Benutzer mit eingeschränkten Rechten erstellen
+CREATE USER 'druckshop'@'localhost' IDENTIFIED BY 'modul151';
+
+-- 3. Rechte auf genau diese Datenbank geben (nur Zugriff auf diese DB)
+GRANT SELECT, INSERT, UPDATE, DELETE ON 3d_druck_shop.* TO 'druckshop'@'localhost';
+
+-- 4. Änderungen anwenden
+FLUSH PRIVILEGES;
+
+-- 5. In die neue Datenbank wechseln
+USE 3d_druck_shop;
+
+-- 6. Tabellen anlegen
 -- Tabelle: users
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -75,3 +119,4 @@ CREATE TABLE products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+```

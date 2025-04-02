@@ -1,45 +1,55 @@
 <?php
-require_once 'config.php';
+require_once 'config.php'; 
+// DB-Verbindung + Session starten (falls nötig)
 
-$errors = [];
-$success = null;
+$errors = [];      // Sammlung aller Fehlermeldungen
+$success = null;   // Erfolgsmeldung (wird bei erfolgreicher Registrierung gesetzt)
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $confirm = $_POST['confirm_password'];
+    // Wenn Formular per POST gesendet wurde → weiterverarbeiten
 
-    // Benutzername validieren
-    if (empty($username) || strlen($username) < 3 || strlen($username) > 20 || !preg_match("/^[a-zA-Z0-9]+$/", $username)) {
+    $username = trim($_POST['username']); // Benutzernamen bereinigen (Leerzeichen entfernen)
+    $email = trim($_POST['email']);       // E-Mail bereinigen
+    $password = $_POST['password'];       // Passwort auslesen
+    $confirm = $_POST['confirm_password']; // Passwort-Bestätigung
+
+    // Benutzername prüfen (Länge & erlaubte Zeichen)
+    if (
+        empty($username) ||
+        strlen($username) < 3 ||
+        strlen($username) > 20 ||
+        !preg_match("/^[a-zA-Z0-9]+$/", $username)
+    ) {
         $errors[] = "Der Benutzer muss 3-20 Zeichen lang sein und darf nur Buchstaben & Zahlen enthalten.";
     }
 
-    // E-Mail validieren
+    // E-Mail-Format validieren
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Ungültige E-Mail-Adresse.";
     }
 
-    // Passwort validieren
+    // Passwortlänge prüfen
     if (strlen($password) < 8) {
         $errors[] = "Das Passwort muss mindestens 8 Zeichen lang sein.";
     }
+
+    // Passwort-Bestätigung prüfen
     if ($password !== $confirm) {
         $errors[] = "Die Passwörter stimmen nicht überein.";
     }
 
-    // Existenz prüfen
+    // Prüfen, ob Benutzername oder E-Mail bereits existieren
     $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
     $stmt->execute([$username, $email]);
     if ($stmt->fetch()) {
         $errors[] = "Benutzername oder E-Mail ist bereits vergeben.";
     }
 
-    // Registrierung durchführen
+    // Wenn keine Fehler vorhanden sind → Benutzer registrieren
     if (empty($errors)) {
-        $hashed = password_hash($password, PASSWORD_DEFAULT);
-        $insert = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+        $hashed = password_hash($password, PASSWORD_DEFAULT); // Passwort sicher hashen (C11)
 
+        $insert = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
         if ($insert->execute([$username, $email, $hashed])) {
             $success = "Registrierung erfolgreich! Du kannst dich jetzt <a href='login.php'> einloggen</a>.";
         } else {
