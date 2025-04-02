@@ -7,8 +7,8 @@ session_start([
 ]);
 
 $dsn = 'mysql:host=localhost;dbname=3d_druck_shop;charset=utf8mb4';
-$user = 'root';
-$password = '';
+$user = 'druckshop';
+$password = 'modul151';
 
 try {
     $pdo = new PDO($dsn, $user, $password, [

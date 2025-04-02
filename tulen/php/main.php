@@ -7,181 +7,182 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-//echo "<h2>Willkommen, " . htmlspecialchars($_SESSION['username']) . "!</h2>";
-//echo "<p>Hier sind alle Produkte:</p>";
+$user_id = $_SESSION['user_id'];
 
-// Produkte aus Datenbank abrufen
-//$stmt = $pdo->query("SELECT * FROM products");
-//while ($product = $stmt->fetch()) {
-//echo "<div><h3>" . htmlspecialchars($product['title']) . "</h3><p>" . htmlspecialchars($product['description']) . "</p><p>Preis: " . htmlspecialchars($product['price']) . "€</p></div>";
-//}
-
-// Logout-Link
-//echo '<p><a href="./logout.php">Abmelden</a></p>';
+// Produkte laden
+$stmt = $pdo->prepare("SELECT * FROM products WHERE user_id = :uid ORDER BY created_at DESC");
+$stmt->execute(['uid' => $user_id]);
+$products = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Tulen</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../assets/css/main.css" />
-	</head>
-	<body class="landing is-preload">
-		<div id="page-wrapper">
 
-			<!-- Header -->
-				<header id="header" class="alt">
-					<h1><a href="./main.php">Tulen</a> by Marco Frey - Modul 151</h1>
-					<nav id="nav">
-						<ul>
-							<li><a href="./main.php">Home</a></li>
-							<li>
-								<a class="icon solid fa-angle-down">Projects</a>
-								<ul>
-									<li><a href="404.html">Generic</a></li>
-									<li><a href="404.html">Contact</a></li>
-									<li><a href="404.html">Elements</a></li>
-									<li>
-										<a href="#">Submenu</a>
-										<ul>
-											<li><a href="404.html">Option One</a></li>
-											<li><a href="404.html">Option Two</a></li>
-											<li><a href="404.html">Option Three</a></li>
-											<li><a href="404.html">Option Four</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-							<li><a href="logout.php" class="button">Logout</a></li>
-						</ul>
-					</nav>
-				</header>
+<head>
+    <title>Tulen</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
 
-			<!-- Banner -->
-				<section id="banner">
-					<h2>Tulen</h2>
-					<p>Herzlich Wilkommen! Du bist nun eingelogt lul</p>
-					<ul class="actions special">
-	
-					</ul>
-				</section>
+<body class="landing is-preload">
+    <id="page-wrapper">
 
-			<!-- Main -->
-				<section id="main" class="container">
+        <!-- Header -->
+        <header id="header" class="alt">
+            <h1><a href="./main.php">Tulen</a> by Marco Frey - Modul 151</h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="./main.php">Home</a></li>
+                    <li>
+                        <a href="./products.php">Edit Products</a>
+                        <a href="./settings.php">Settings</a>
+                    </li>
+                    <li><a href="logout.php" class="button">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
 
-					<section class="box special">
-						<header class="major">
-							<h2>Introducing the ultimate mobile app
-							<br />
-							for doing stuff with your phone</h2>
-							<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc ornare<br />
-							adipiscing nunc adipiscing. Condimentum turpis massa.</p>
-						</header>
-						<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-					</section>
+        <!-- Banner -->
+        <section id="banner">
+            <h2>Tulen</h2>
+            <p>Herzlich Wilkommen! Du bist nun eingelogt lul</p>
+            <ul class="actions special">
 
-					<section class="box special features">
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-bolt accent2"></span>
-								<h3>Magna etiam</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-chart-area accent3"></span>
-								<h3>Ipsum dolor</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-cloud accent4"></span>
-								<h3>Sed feugiat</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-lock accent5"></span>
-								<h3>Enim phasellus</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-					</section>
+            </ul>
+        </section>
 
-					<div class="row">
-						<div class="col-6 col-12-narrower">
+        <!-- Main -->
+        <section id="main" class="container">
 
-							<section class="box special">
-								<span class="image featured"><img src="images/pic02.jpg" alt="" /></span>
-								<h3>Sed lorem adipiscing</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
+            <section class="box special">
+                <header class="major">
+                    <h2>Introducing the ultimate mobile app
+                        <br />
+                        for doing stuff with your phone
+                    </h2>
+                    <p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc ornare<br />
+                        adipiscing nunc adipiscing. Condimentum turpis massa.</p>
+                </header>
+                <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+            </section>
 
-						</div>
-						<div class="col-6 col-12-narrower">
+            <section class="box special features">
+                <div class="features-row">
+                    <section>
+                        <span class="icon solid major fa-bolt accent2"></span>
+                        <h3>Magna etiam</h3>
+                        <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim
+                            rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+                    </section>
+                    <section>
+                        <span class="icon solid major fa-chart-area accent3"></span>
+                        <h3>Ipsum dolor</h3>
+                        <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim
+                            rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+                    </section>
+                </div>
+                <div class="features-row">
+                    <section>
+                        <span class="icon solid major fa-cloud accent4"></span>
+                        <h3>Sed feugiat</h3>
+                        <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim
+                            rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+                    </section>
+                    <section>
+                        <span class="icon solid major fa-lock accent5"></span>
+                        <h3>Enim phasellus</h3>
+                        <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim
+                            rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+                    </section>
+                </div>
+            </section>
 
-							<section class="box special">
-								<span class="image featured"><img src="images/pic03.jpg" alt="" /></span>
-								<h3>Accumsan integer</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
+            <div class="row">
+                <div class="col-6 col-12-narrower">
 
-						</div>
-					</div>
+                    <section class="box special">
+                        <span class="image featured"><img src="images/pic02.jpg" alt="" /></span>
+                        <h3>Sed lorem adipiscing</h3>
+                        <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim
+                            rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+                        <ul class="actions special">
+                            <li><a href="#" class="button alt">Learn More</a></li>
+                        </ul>
+                    </section>
 
-				</section>
+                </div>
+                <div class="col-6 col-12-narrower">
 
-			<!-- CTA -->
-				<section id="cta">
+                    <section class="box special">
+                        <span class="image featured"><img src="images/pic03.jpg" alt="" /></span>
+                        <h3>Accumsan integer</h3>
+                        <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim
+                            rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+                        <ul class="actions special">
+                            <li><a href="#" class="button alt">Learn More</a></li>
+                        </ul>
+                    </section>
 
-					<h2>Sign up for beta access</h2>
-					<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
+                </div>
+            </div>
 
-					<form>
-						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
-								<input type="email" name="email" id="email" placeholder="Email Address" />
-							</div>
-							<div class="col-4 col-12-mobilep">
-								<input type="submit" value="Sign Up" class="fit" />
-							</div>
-						</div>
-					</form>
+        </section>
 
-				</section>
+        <!-- UserDetails -->
+        <section id="UserDetails">
+            <h2>Passwort ändern</h2>
+            <div class="form-container">
+                <div class="row gtr-50 gtr-uniform">
+                    <div class="col-8 col-12-mobilep">
+                        <form method="post" action="change_password.php">
+                            <label for="current_password">Aktuelles Passwort:</label>
+                            <input type="password" id="current_password" name="current_password" required>
 
-			<!-- Footer -->
-				<footer id="footer">
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</footer>
+                            <label for="new_password">Neues Passwort:</label>
+                            <input type="password" id="new_password" name="new_password" required minlength="8">
 
-		</div>
+                            <label for="confirm_password">Neues Passwort bestätigen:</label>
+                            <input type="password" id="confirm_password" name="confirm_password" required minlength="8">
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+                            <button type="submit">Passwort ändern</button>
+                        </form>
+                    </div>
+                </div>
 
-	</body>
+        </section>
+        <br>
+        <br>
+        <section class="form-container">
+            <h2>Meine Produkte</h2>
+            <?php if (count($products) === 0): ?>
+                <p>Du hast noch keine Produkte erstellt.</p>
+            <?php else: ?>
+                <ul>
+                    <?php foreach ($products as $p): ?>
+                        <li>
+                            <strong><?= htmlspecialchars($p['name']) ?></strong><br>
+                            <?= nl2br(htmlspecialchars($p['description'])) ?><br>
+                            <small>Erstellt am: <?= $p['created_at'] ?></small>
+                        </li>
+                        <hr>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </section>
+
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
 </html>

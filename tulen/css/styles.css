@@ -75,3 +75,25 @@ button:hover {
 .button:hover {
     background-color: #5058e2;
 }
+
+.error-message {
+    background-color: #ffe0e0;
+    border: 1px solid #ff5c5c;
+    color: #a10000;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success-message {
+    background-color: #e0ffe0;
+    border: 1px solid #5ccf5c;
+    color: #007000;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}

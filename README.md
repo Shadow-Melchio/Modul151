@@ -1,52 +1,77 @@
-README - Tulen Webshop
+# 3D-Druck Shop – Modul 151 Projekt
 
-Projektname
+Dies ist ein Webprojekt im Rahmen des Moduls 151. Die Anwendung ist ein einfacher Online-Shop für 3D-Druck-Produkte. Registrierte Benutzer können eigene Produkte erfassen, bearbeiten und löschen. Die Applikation wurde mit PHP, HTML, CSS und einer MySQL-Datenbank umgesetzt.
 
-Tulen Webshop
+## 📦 Features
 
+- ✅ Benutzer-Registrierung & Login mit Session-Management
+- ✅ Passwort-Hashing mit `password_hash()` (C11)
+- ✅ Passwort ändern für eingeloggte Benutzer (C15)
+- ✅ Produkte erfassen, bearbeiten und löschen (C16–C18)
+- ✅ Schutz vor SQL-Injection mit `PDO::prepare()` (C19)
+- ✅ Schutz vor Script-Injection mit `htmlspecialchars()` (C7)
+- ✅ Schutz vor Session-Fixation & Hijacking (C10)
+- ✅ Getrennter DB-User mit eingeschränkten Rechten (C12)
 
-Beschreibung
+## 🛠️ Technologien
 
-Wir wollen in diesem Webshop allerhand Zubehör für 3D-Druck verkaufen können.
+- HTML5 & CSS3
+- PHP 8.x
+- MySQL (phpMyAdmin)
+- PDO für Datenbankzugriffe
+- Session & Security-Techniken
 
+## 📁 Projektstruktur
 
-Funktionen
+/php ├── login.php ├── register.php ├── logout.php ├── products.php ├── edit_product.php ├── delete_product.php ├── change_password.php ├── config.php ├── session_check.php
 
-Übersichtliche Produktkategorien
+/css ├── styles.css
 
-Such- und Filterfunktionen
+## 🔒 Sicherheit
 
-Warenkorb- und Bestellsystem
+- Alle Datenbankabfragen sind mit Prepared Statements ausgeführt.
+- Passwörter werden mit `password_hash()` gespeichert.
+- Session-ID wird bei Login regeneriert.
+- Session-Daten wie IP und User-Agent werden validiert.
+- XSS wird durch `htmlspecialchars()` verhindert.
+- Es wird ein eingeschränkter Datenbankbenutzer verwendet (nur SELECT, INSERT, UPDATE, DELETE).
 
-Benutzerkonto mit Bestellübersicht
+## 👤 Benutzerrollen
 
-Responsive Design für Desktop und Mobilgeräte
+- **Benutzer:** kann sich registrieren, anmelden, Produkte verwalten, Passwort ändern
+- **(Optional) Admin:** Struktur für Admin-Login vorhanden, aktuell aber ohne Funktion
 
+## 🧪 Testen
 
-Technologien
+1. Datenbankstruktur importieren (SQL-Datei nicht enthalten)
+2. Zugangsdaten in `config.php` anpassen
+3. Projekt lokal (z. B. mit XAMPP) im `htdocs`-Verzeichnis starten
+4. Seite aufrufen: `http://localhost/DeinProjektOrdner/`
 
-Programmiersprachen: HTML, CSS und PHP
+## 👨‍💻 Autoren
 
+- Marco Frey
+- Florian Brügger
 
-How to find us
+Modul 151 – Web-Applikationen mit Datenbankanbindung
 
-Webshop im Browser öffnen: http://localhost/Modul_151/Modul151/tulen/index.html
+## 🗃️ SQL-Struktur
 
+```sql
+-- Tabelle: users
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
 
-Mitwirkende
-
-Marco Frey - Backend
-Florian Brügger - Frontend
-
-Installationsanleitung
-
-Code aus github repository herunterladen
-Datenbank in Xampp importieren
-Website mit http://localhost/Modul_151/Modul151/tulen/index.html aufrufen
-Anmelden mit user Brodbeck, PW: brod12345
-
-Kontakt
-
-Falls du Fragen hast, kontaktiere uns unter:
-
-E-Mail: marco.frey@bbzbl-it.ch oder florian.bruegger@bbzbl-it.ch
+-- Tabelle: products
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
