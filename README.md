@@ -67,11 +67,19 @@ Taaadaa und schon ist alles Installiert, Viel Spass :D
 -- 1. Neue Datenbank erstellen
 CREATE DATABASE 3d_druck_shop CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
--- 2. Benutzer mit eingeschränkten Rechten erstellen
-CREATE USER 'druckshop'@'localhost' IDENTIFIED BY 'modul151';
+# Rechte für `druckshop`@`localhost`
+GRANT USAGE ON *.* TO `druckshop`@`localhost` IDENTIFIED BY PASSWORD '*5938B8149B03AEEC365EB3F6EDAD99C452C003CA';
+GRANT SELECT, INSERT, UPDATE, DELETE ON `3d\_druck\_shop`.* TO `druckshop`@`localhost`;
 
--- 3. Rechte auf genau diese Datenbank geben (nur Zugriff auf diese DB)
-GRANT SELECT, INSERT, UPDATE, DELETE ON 3d_druck_shop.* TO 'druckshop'@'localhost';
+# Rechte für `root`@`127.0.0.1`
+GRANT ALL PRIVILEGES ON *.* TO `root`@`127.0.0.1` WITH GRANT OPTION;
+
+# Rechte für `root`@`::1`
+GRANT ALL PRIVILEGES ON *.* TO `root`@`::1` WITH GRANT OPTION;
+
+# Rechte für `root`@`localhost`
+GRANT ALL PRIVILEGES ON *.* TO `root`@`localhost` WITH GRANT OPTION;
+GRANT PROXY ON ''@'%' TO 'root'@'localhost' WITH GRANT OPTION;
 
 -- 4. Änderungen anwenden
 FLUSH PRIVILEGES;
