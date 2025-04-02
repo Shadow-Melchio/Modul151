@@ -54,10 +54,14 @@ Modul 151 – Web-Applikationen mit Datenbankanbindung
 - Mail: marco.frey@bbzbl-it.ch
 - Telefon: +41 79 631 02 25
 
-## 🗃️ SQL-Struktur
+## 🗃️ Installationsanleitung
 
-Führe folgende SQL-Befehle in phpMyAdmin → SQL, über ein MySQL-Terminal oder mit einem Admin-Tool wie MySQL Workbench aus.
-
+1. Alles herunterladen oder per GitHub desktop in htdocs (Xampp Verzeichniss) Ordner kopieren.
+2. XAMPP starten (Apache + SQL)
+3. Gehe auf die Seite http://localhost/phpmyadmin
+4. Dann Datei im Zip namens 3d_druck_shop.sql importieren, ODER Folgenden Code unten ausführen  (Beim Import wird Eingeschränkter Benutzer nicht eingestellt)
+5. Gehe auf die Seite http://localhost/tulen/index.html
+Taaadaa und schon ist alles Installiert, Viel Spass :D
 
 ```sql
 -- 1. Neue Datenbank erstellen
