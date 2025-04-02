@@ -21,32 +21,6 @@ Dies ist ein Webprojekt im Rahmen des Moduls 151. Die Anwendung ist ein einfache
 - PDO für Datenbankzugriffe
 - Session & Security-Techniken
 
-## 📁 Projektstruktur
-Wichtigster Teil unserers Projektes.
-(Ordner die nicht hier aufgelistet sind, sind nicht relevant für Prüfung der Abgabe)
-
-/tulen
-  ├── README.md
-  ├── index.html
-    /php
-      ├── login.php
-      ├── register.php
-      ├── logout.php
-      ├── products.php
-      ├── edit_product.php
-      ├── delete_product.php
-      ├── change_password.php
-      ├── config.php
-      ├── session_check.php
-      ├── main.php
-    /css
-      ├── styles.css
-      ├── style.css
-      ├── index.css
-    /images
-      ├── Banner_pic.jpg
-      ├── banner.jpg
-
 ## 🔒 Sicherheit
 
 - Alle Datenbankabfragen sind mit Prepared Statements ausgeführt.
