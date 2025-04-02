@@ -59,35 +59,21 @@ Modul 151 – Web-Applikationen mit Datenbankanbindung
 1. Alles herunterladen oder per GitHub desktop in htdocs (Xampp Verzeichniss) Ordner kopieren.
 2. XAMPP starten (Apache + SQL)
 3. Gehe auf die Seite http://localhost/phpmyadmin
-4. Dann Datei im Zip namens 3d_druck_shop.sql importieren, ODER Folgenden Code unten ausführen  (Beim Import wird Eingeschränkter Benutzer nicht eingestellt)
-5. Gehe auf die Seite http://localhost/tulen/index.html
+4. WICHTIG: Die Datei für den Import übernimmt nicht die Benutzer. Deshalb empfehle ich den Ausgewählten Code in phpMyAdmin auszuführen!
+5. Sobald dies gemacht ist kannst du nun auf: http://localhost/tulen/index.html
 Taaadaa und schon ist alles Installiert, Viel Spass :D
 
 ```sql
--- 1. Neue Datenbank erstellen
+-- 1. Neue Datenbank erstellen unter dem Reiter SQL
 CREATE DATABASE 3d_druck_shop CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-# Rechte für `druckshop`@`localhost`
+-- 2. Rechte für `druckshop`@`localhost`
 GRANT USAGE ON *.* TO `druckshop`@`localhost` IDENTIFIED BY PASSWORD '*5938B8149B03AEEC365EB3F6EDAD99C452C003CA';
 GRANT SELECT, INSERT, UPDATE, DELETE ON `3d\_druck\_shop`.* TO `druckshop`@`localhost`;
 
-# Rechte für `root`@`127.0.0.1`
-GRANT ALL PRIVILEGES ON *.* TO `root`@`127.0.0.1` WITH GRANT OPTION;
+-- 3. In Datenbank wechseln und dort weiter Code ausführen
 
-# Rechte für `root`@`::1`
-GRANT ALL PRIVILEGES ON *.* TO `root`@`::1` WITH GRANT OPTION;
-
-# Rechte für `root`@`localhost`
-GRANT ALL PRIVILEGES ON *.* TO `root`@`localhost` WITH GRANT OPTION;
-GRANT PROXY ON ''@'%' TO 'root'@'localhost' WITH GRANT OPTION;
-
--- 4. Änderungen anwenden
-FLUSH PRIVILEGES;
-
--- 5. In die neue Datenbank wechseln
-USE 3d_druck_shop;
-
--- 6. Tabellen anlegen
+-- 4. Tabellen anlegen in REITER SQL UNTER DATENBANK 3d_druck_shop
 -- Tabelle: users
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
